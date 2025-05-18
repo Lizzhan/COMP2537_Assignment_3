@@ -73,48 +73,55 @@ function setup(pairs) {
 
   let firstCard = undefined;
   let secondCard = undefined;
+  let lockBoard = false; 
 
   $("#game_grid").on("click", ".card", function () {
+    if (lockBoard) return;         
+    if ($(this).hasClass("flip")) return;
 
-      if ($(this).hasClass("flip")) return; 
-      $(this).toggleClass("flip");
+    clicks++;
+    console.log(clicks);
+    $(this).toggleClass("flip");
 
-      if (!firstCard) {
-        firstCard = $(this).find(".front_face")[0];
+    if (!firstCard) {
+      firstCard = $(this).find(".front_face")[0];
+    } else {
+      secondCard = $(this).find(".front_face")[0];
+
+      if (secondCard === firstCard) {
+        console.log("Cannot click the same card twice");
+        secondCard = undefined;
+        return;
+      }
+
+      console.log(firstCard, secondCard);
+
+      if (firstCard.src === secondCard.src) {
+        console.log("Match!");
+        $(`#${firstCard.id}`).parent().off("click");
+        $(`#${secondCard.id}`).parent().off("click");
+
+        firstCard = undefined;
+        secondCard = undefined;
+        clickedPairs++;
+        winCheck(pairs, clickedPairs);
       } else {
-        secondCard = $(this).find(".front_face")[0];
-        if (secondCard === firstCard) {
-          console.log("Cannot click the same card twice");
-          secondCard = undefined;
-          return;
-        }
+        console.log("No match");
+        lockBoard = true; 
 
-        console.log(firstCard, secondCard);
+        setTimeout(() => {
+          $(`#${firstCard.id}`).parent().toggleClass("flip");
+          $(`#${secondCard.id}`).parent().toggleClass("flip");
 
-        if (firstCard.src === secondCard.src) {
-          console.log("Match!");
-          $(`#${firstCard.id}`).parent().off("click");
-          $(`#${secondCard.id}`).parent().off("click");
           firstCard = undefined;
           secondCard = undefined;
-          clickedPairs++;
-          winCheck(pairs, clickedPairs)
-        } else {
-          console.log("No match");
-
-          setTimeout(() => {
-            console.log(firstCard, secondCard);
-
-            $(`#${firstCard.id}`).parent().toggleClass("flip");
-            $(`#${secondCard.id}`).parent().toggleClass("flip");
-            firstCard = undefined;
-            secondCard = undefined;
-          }, 1000);
-        }
+          lockBoard = false; 
+        }, 1000);
       }
+    }
   });
-
 }
+
 
 function winCheck(pairs, clickedPairs){
   if(clickedPairs === pairs){
