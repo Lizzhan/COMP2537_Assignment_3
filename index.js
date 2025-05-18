@@ -3,6 +3,43 @@ var cardCount = 1;
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
 const MAX = 1025;
 const grid = document.getElementById('game_grid');
+const navbar = document.getElementById('navbar-example2');
+
+function setGridLayout(difficulty) {
+  grid.className = ''; 
+  if (difficulty === 'easy') grid.classList.add('easy-layout');
+  if (difficulty === 'medium') grid.classList.add('medium-layout');
+  if (difficulty === 'hard') grid.classList.add('hard-layout');
+}
+
+
+document.getElementById("light-button").addEventListener("click", () => {
+  document.body.classList.add("light-mode");
+  document.body.classList.remove("dark-mode");
+});
+
+document.getElementById("dark-button").addEventListener("click", () => {
+  document.body.classList.add("dark-mode");
+  document.body.classList.remove("light-mode");
+});
+
+document.getElementById("easy").addEventListener("click", () => {
+  setGridLayout("easy");
+  grid.innerHTML = "";
+  setup(3); 
+});
+
+document.getElementById("medium").addEventListener("click", () => {
+  setGridLayout("medium");
+  grid.innerHTML = "";
+  setup(6);
+});
+
+document.getElementById("hard").addEventListener("click", () => {
+  setGridLayout("hard");
+  grid.innerHTML = "";
+  setup(10); 
+});
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -69,6 +106,7 @@ function renderCards(pairNum) {
 
 function setup(pairs) {
   renderCards(pairs);
+  
   let clickedPairs = 0;
 
   let firstCard = undefined;
@@ -129,4 +167,4 @@ function winCheck(pairs, clickedPairs){
   }
 }
 
-$(document).ready(setup(3))
+$(document).ready()

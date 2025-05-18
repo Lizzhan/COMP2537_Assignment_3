@@ -3,22 +3,42 @@ body {
 }
 
 #game_grid {
-  border: 2px tomato solid;
-  width: 600px;
-  height: 400px;
+  display: grid;
+  gap: 10px;
+  justify-content: center;
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
 }
 
-
 .card {
-  width: 33.3%;
+  width: 100px;
+  height: 100px;
   position: relative;
   transition: transform 1s;
   perspective: 1000px;
   transform-style: preserve-3d;
 }
+
+.easy-layout {
+  grid-template-columns: repeat(3, 1fr); 
+  grid-template-rows: repeat(2, 1fr);   
+  width: 340px;
+  height: 280px;
+}
+
+.medium-layout {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 460px;
+  height: 420px;
+}
+
+.hard-layout {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 600px;
+  height: 560px;
+}
+
 
 
 img {
@@ -39,4 +59,45 @@ img {
 
 .front_face {
   transform: rotateY(180deg);
+}
+
+.light-mode{
+  background-color: white;
+  color: black;
+}
+
+.dark-mode{
+  background-color: black;
+  color: white;
+}
+
+.light-mode .card {
+  background-color: #f8f9fa;
+}
+
+.dark-mode .card {
+  background-color: #343a40;
+  border-color: white;
+}
+
+.light-mode .navbar {
+  background-color: #f8f9fa !important; 
+  color: black;
+}
+
+.dark-mode .navbar {
+  background-color: #212529 !important; 
+  color: white;
+}
+
+.light-mode .navbar .nav-link,
+.light-mode .navbar .navbar-brand,
+.light-mode .navbar .btn {
+  color: black !important;
+}
+
+.dark-mode .navbar .nav-link,
+.dark-mode .navbar .navbar-brand,
+.dark-mode .navbar .btn {
+  color: white !important;
 }
