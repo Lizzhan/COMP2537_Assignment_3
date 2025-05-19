@@ -1,6 +1,6 @@
 var clicks = 0;
 var cardCount = 1;
-var gameWon;
+var canPlay = false;
 var timeLeft = 60; 
 var timerInterval;
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
@@ -56,6 +56,7 @@ function startTimer(duration) {
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval); 
+      canPlay = false;
       messageDisplay.innerHTML="TIMES UP! YOU LOST!";
     }
   }, 1000);
@@ -85,10 +86,12 @@ document.getElementById("hard").addEventListener("click", () => {
 });
 
 document.getElementById("start").addEventListener("click", ()=>{
-    startTimer(60);
+  canPlay = true;
+  startTimer(60);
 });
 
 document.getElementById("reset").addEventListener("click", () => {
+  canPlay = true;
   const grid = document.getElementById("game_grid");
   grid.innerHTML = "";
 
@@ -184,6 +187,7 @@ function setup(pairs) {
   let lockBoard = false; 
 
   $("#game_grid").on("click", ".card", function () {
+    if (!canPlay) return;
     if (lockBoard) return;         
     if ($(this).hasClass("flip")) return;
 
