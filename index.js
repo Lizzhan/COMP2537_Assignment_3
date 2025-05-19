@@ -1,7 +1,7 @@
 var clicks = 0;
 var cardCount = 1;
 var canPlay = false;
-var timeLeft = 30; 
+var timeLeft = 60; 
 var timerInterval;
 
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
@@ -102,6 +102,9 @@ document.getElementById("reset").addEventListener("click", () => {
   document.getElementById("clicks").textContent = 0;
   document.getElementById("timer").textContent = "--";
   document.getElementById("message").textContent = "";
+  tpDisplay.textContent = "--"
+  pcDisplay.textContent = "--"
+  plDisplay.textContent = "--"
 
   grid.className = "";
 });
