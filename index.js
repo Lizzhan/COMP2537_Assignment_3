@@ -99,7 +99,7 @@ document.getElementById("reset").addEventListener("click", () => {
 
   clearInterval(timerInterval);
 
-  document.getElementById("clicks").textContent = 0;
+  document.getElementById("clicks").textContent = "--";
   document.getElementById("timer").textContent = "--";
   document.getElementById("message").textContent = "";
   tpDisplay.textContent = "--"
