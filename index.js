@@ -46,19 +46,6 @@ function setGridLayout(difficulty) {
   if (difficulty === 'hard') grid.classList.add('hard-layout');
 }
 
-
-document.getElementById("light-button").addEventListener("click", () => {
-  document.body.classList.add("light-mode");
-  document.body.classList.remove("dark-mode");
-});
-
-document.getElementById("dark-button").addEventListener("click", () => {
-  document.body.classList.add("dark-mode");
-  document.body.classList.remove("light-mode");
-});
-
-
-
 function startTimer(duration) {
   timeLeft = duration;
   document.getElementById("timer").textContent = timeLeft;
