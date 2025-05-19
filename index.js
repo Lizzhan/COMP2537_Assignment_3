@@ -6,10 +6,38 @@ var timerInterval;
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
 const MAX = 1025;
 
+const body = document.body;
 const grid = document.getElementById('game_grid');
 const navbar = document.getElementById('navbar-example2');
+const toggleBtn = document.getElementById("theme-toggle");
 const clickDisplay = document.getElementById('clicks');
 const messageDisplay = document.getElementById('message');
+const tpDisplay = document.getElementById('tp');
+const pcDisplay = document.getElementById('pc');
+const plDisplay = document.getElementById('pl');
+
+function setTheme(isDark) {
+  if (isDark) {
+    body.classList.add("dark-mode");
+    body.classList.remove("light-mode");
+    toggleBtn.textContent = "☀️ Light Mode";
+    toggleBtn.className = "btn btn-outline-light";
+  } else {
+    body.classList.add("light-mode");
+    body.classList.remove("dark-mode");
+    toggleBtn.textContent = "🌙 Dark Mode";
+    toggleBtn.className = "btn btn-outline-dark";
+  }
+}
+
+toggleBtn.addEventListener("click", () => {
+  const isCurrentlyDark = body.classList.contains("dark-mode");
+  setTheme(!isCurrentlyDark);
+});
+
+window.addEventListener("DOMContentLoaded", () => {
+  setTheme(true); 
+});
 
 function setGridLayout(difficulty) {
   grid.className = ''; 
@@ -161,7 +189,7 @@ function renderCards(pairNum) {
 
 function setup(pairs) {
   renderCards(pairs);
-  
+  tpDisplay.innerHTML = pairs;
   let clickedPairs = 0;
 
   let firstCard = undefined;
@@ -198,6 +226,8 @@ function setup(pairs) {
         firstCard = undefined;
         secondCard = undefined;
         clickedPairs++;
+        pcDisplay.innerHTML = clickedPairs;
+        plDisplay.innerHTML = pairs - clickedPairs;
         winCheck(pairs, clickedPairs);
       } else {
         console.log("No match");

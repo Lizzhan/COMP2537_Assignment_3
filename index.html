@@ -13,19 +13,33 @@
 <body>
   <nav id="navbar-example2" class="navbar bg-body-tertiary px-3 mb-3">
     <a class="navbar-brand" href="#">PokeFlip</a>
-    <ul class="nav nav-pills">
-        <li class="nav-item">
-          <button id="light-button" type="button" class="btn btn-light">Light</button>
-        </li>
-        <li class="nav-item">
-          <button id="dark-button" type="button" class="btn btn-dark">Dark</button>
-        </li>
-    </ul>
+<button id="theme-toggle" type="button" class="btn btn-outline-dark">🌙 Dark Mode</button>
   </nav>
 
 <div class="container d-flex flex-column justify-content-evenly align-items-center h-100 gap-3">
-  <h3>Clicks: <span id="clicks">0</span></h3>
-  <h3>Time Left: <span id="timer">--</span></h3>
+<div class="d-flex flex-wrap justify-content-center gap-4 text-center my-3">
+  <div>
+    <h5 class="mb-1">Time Left</h5>
+    <span id="timer" class="fs-4">--</span>
+  </div>
+  <div>
+    <h5 class="mb-1">Total Clicks</h5>
+    <span id="clicks" class="fs-4">--</span>
+  </div>
+  <div>
+    <h5 class="mb-1">Total Pairs</h5>
+    <span id="tp" class="fs-4">--</span>
+  </div>
+  <div>
+    <h5 class="mb-1">Pairs Clicked</h5>
+    <span id="pc" class="fs-4">--</span>
+  </div>
+  <div>
+    <h5 class="mb-1">Pairs Left</h5>
+    <span id="pl" class="fs-4">--</span>
+  </div>
+</div>
+
   <div id="info">
     <button id="easy" type="button" class="btn btn-success">Easy</button>
     <button id="medium" type="button" class="btn btn-warning">Medium</button>
@@ -41,7 +55,14 @@
 
   </div>
 </div>
-
+<ul class="nav justify-content-center border-bottom pb-3 mb-3 w-100">
+     <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li> 
+     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Dummy</a></li> 
+     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Dummy</a></li> 
+     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Dummy</a></li> 
+     <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Dummy</a></li> 
+</ul> 
+<p class="text-center text-body-secondary">© 2025 Company, Inc</p> 
 
 </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
