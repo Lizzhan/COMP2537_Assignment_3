@@ -90,7 +90,18 @@ document.getElementById("hard").addEventListener("click", () => {
 
 document.getElementById("start").addEventListener("click", ()=>{
   canPlay = true;
-  startTimer(30);
+  if(grid.classList.contains('hard-layout')){
+    const cards = document.querySelectorAll(".card:not(.matched)");
+    cards.forEach(card => card.classList.add("flip"));
+
+    setTimeout(() => {
+      cards.forEach(card => card.classList.remove("flip"));
+    }, 2000);
+    startTimer(40);
+  }else{
+    startTimer(30);
+  }
+  
 });
 
 document.getElementById("reset").addEventListener("click", () => {
@@ -109,16 +120,6 @@ document.getElementById("reset").addEventListener("click", () => {
   clickedPairs = 0;
   grid.className = "";
 });
-
-document.getElementById("powerup").addEventListener("click", ()=>{
-  const cards = document.querySelectorAll(".card:not(.matched)");
-  cards.forEach(card => card.classList.add("flip"));
-
-  setTimeout(() => {
-    cards.forEach(card => card.classList.remove("flip"));
-  }, 3000);
-});
-
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
