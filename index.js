@@ -118,6 +118,7 @@ document.getElementById("reset").addEventListener("click", () => {
   pcDisplay.textContent = "--"
   plDisplay.textContent = "--"
   clickedPairs = 0;
+  clicks = 0;
   grid.className = "";
 });
 
@@ -223,7 +224,7 @@ function setup(pairs) {
           firstCard = undefined;
           secondCard = undefined;
           lockBoard = false; 
-        }, 1000);
+        }, 1000).then();
       }
     }
   });
