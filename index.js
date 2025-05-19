@@ -106,7 +106,7 @@ document.getElementById("reset").addEventListener("click", () => {
   tpDisplay.textContent = "--"
   pcDisplay.textContent = "--"
   plDisplay.textContent = "--"
-
+  clickedPairs = 0;
   grid.className = "";
 });
 
