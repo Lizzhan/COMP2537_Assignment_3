@@ -1,9 +1,15 @@
 var clicks = 0;
 var cardCount = 1;
+var gameWon;
+var timeLeft = 60; 
+var timerInterval;
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
 const MAX = 1025;
+
 const grid = document.getElementById('game_grid');
 const navbar = document.getElementById('navbar-example2');
+const clickDisplay = document.getElementById('clicks');
+const messageDisplay = document.getElementById('message');
 
 function setGridLayout(difficulty) {
   grid.className = ''; 
@@ -23,6 +29,28 @@ document.getElementById("dark-button").addEventListener("click", () => {
   document.body.classList.remove("light-mode");
 });
 
+
+
+function startTimer(duration) {
+  timeLeft = duration;
+  document.getElementById("timer").textContent = timeLeft;
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    document.getElementById("timer").textContent = timeLeft;
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval); 
+      messageDisplay.innerHTML="TIMES UP! YOU LOST!";
+    }
+  }, 1000);
+};
+
+function stopTimer() {
+  clearInterval(timerInterval); 
+};
+
+
 document.getElementById("easy").addEventListener("click", () => {
   setGridLayout("easy");
   grid.innerHTML = "";
@@ -41,13 +69,40 @@ document.getElementById("hard").addEventListener("click", () => {
   setup(10); 
 });
 
+document.getElementById("start").addEventListener("click", ()=>{
+    startTimer(60);
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  const grid = document.getElementById("game_grid");
+  grid.innerHTML = "";
+
+  clearInterval(timerInterval);
+
+  document.getElementById("clicks").textContent = 0;
+  document.getElementById("timer").textContent = "--";
+  document.getElementById("message").textContent = "";
+
+  grid.className = "";
+});
+
+document.getElementById("powerup").addEventListener("click", ()=>{
+  const cards = document.querySelectorAll(".card:not(.matched)");
+  cards.forEach(card => card.classList.add("flip"));
+
+  setTimeout(() => {
+    cards.forEach(card => card.classList.remove("flip"));
+  }, 3000);
+});
+
+
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
   return array;
-}
+};
 
 async function getPokemon(){
   let num = Math.floor(Math.random() * 1025) + 1;
@@ -56,7 +111,7 @@ async function getPokemon(){
   let link = mon.sprites.other['official-artwork'].front_default;
 
   createCard(link);
-}
+};
 
 function createCard(link){
     const card = document.createElement("div");
@@ -78,7 +133,7 @@ function createCard(link){
     card.appendChild(frontImg);
     card.appendChild(backImg);
     grid.appendChild(card);
-}
+};
 
 function renderCards(pairNum) {
   const imageLinks = [];
@@ -102,7 +157,7 @@ function renderCards(pairNum) {
   }
 
   getValidPokemon();
-}
+};
 
 function setup(pairs) {
   renderCards(pairs);
@@ -118,6 +173,7 @@ function setup(pairs) {
     if ($(this).hasClass("flip")) return;
 
     clicks++;
+    clickDisplay.innerHTML = clicks;
     console.log(clicks);
     $(this).toggleClass("flip");
 
@@ -158,13 +214,14 @@ function setup(pairs) {
       }
     }
   });
-}
+};
 
 
 function winCheck(pairs, clickedPairs){
   if(clickedPairs === pairs){
-    console.log("YOU WIN!")
+    messageDisplay.innerHTML = "YOU WIN!"
+    stopTimer()
   }
-}
+};
 
-$(document).ready()
+$(document).ready();

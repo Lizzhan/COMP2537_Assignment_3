@@ -23,13 +23,20 @@
     </ul>
   </nav>
 
-<div class="container d-flex flex-column justify-content-evenly align-items-center h-100 gap-5">
+<div class="container d-flex flex-column justify-content-evenly align-items-center h-100 gap-3">
   <h3>Clicks: <span id="clicks">0</span></h3>
+  <h3>Time Left: <span id="timer">--</span></h3>
   <div id="info">
     <button id="easy" type="button" class="btn btn-success">Easy</button>
     <button id="medium" type="button" class="btn btn-warning">Medium</button>
     <button id="hard" type="button" class="btn btn-danger">Hard</button>
   </div>
+  <div class="state">
+    <button id="start" type="button" class="btn btn-primary">Start</button>
+    <button id="reset" type="button" class="btn btn-secondary">Reset</button>
+    <button id="powerup" type="button" class="btn btn-info">Power Up</button>
+  </div>
+  <p id="message"></p>
   <div id="game_grid">
 
   </div>
