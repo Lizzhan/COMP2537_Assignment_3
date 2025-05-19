@@ -1,7 +1,7 @@
 var clicks = 0;
 var cardCount = 1;
 var canPlay = false;
-var timeLeft = 60; 
+var timeLeft = 30; 
 var timerInterval;
 
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
@@ -57,6 +57,7 @@ function startTimer(duration) {
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval); 
+      
       canPlay = false;
       messageDisplay.innerHTML="TIMES UP! YOU LOST!";
     }
