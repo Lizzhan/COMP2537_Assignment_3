@@ -3,6 +3,7 @@ var cardCount = 1;
 var canPlay = false;
 var timeLeft = 60; 
 var timerInterval;
+var clickedPairs = 0;
 
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
 const MAX = 1025;
@@ -171,7 +172,6 @@ async function getValidPokemon(pairNum) {
 function setup(pairs) {
   getValidPokemon(pairs);
   tpDisplay.innerHTML = pairs;
-  let clickedPairs = 0;
 
   let firstCard = undefined;
   let secondCard = undefined;
@@ -233,6 +233,7 @@ function winCheck(pairs, clickedPairs){
   if(clickedPairs === pairs){
     messageDisplay.innerHTML = "YOU WIN!"
     stopTimer()
+    clickedPairs = 0;
   }
 };
 
