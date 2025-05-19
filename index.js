@@ -3,6 +3,7 @@ var cardCount = 1;
 var canPlay = false;
 var timeLeft = 60; 
 var timerInterval;
+
 const POKI_DEX = 'https://pokeapi.co/api/v2/pokemon';
 const MAX = 1025;
 
@@ -122,15 +123,6 @@ function shuffle(array) {
   return array;
 };
 
-async function getPokemon(){
-  let num = Math.floor(Math.random() * 1025) + 1;
-  let res = await fetch(`${POKI_DEX}/${num}`)
-  let mon = await res.json();
-  let link = mon.sprites.other['official-artwork'].front_default;
-
-  createCard(link);
-};
-
 function createCard(link){
     const card = document.createElement("div");
     card.className = "card";
@@ -153,10 +145,8 @@ function createCard(link){
     grid.appendChild(card);
 };
 
-function renderCards(pairNum) {
-  const imageLinks = [];
-
-  async function getValidPokemon() {
+async function getValidPokemon(pairNum) {
+    let imageLinks = [];
     while (imageLinks.length < pairNum) {
       let num = Math.floor(Math.random() * MAX) + 1;
       let res = await fetch(`${POKI_DEX}/${num}`);
@@ -172,13 +162,10 @@ function renderCards(pairNum) {
     const shuffled = shuffle(doubled);
 
     shuffled.forEach(link => createCard(link));
-  }
-
-  getValidPokemon();
-};
+}
 
 function setup(pairs) {
-  renderCards(pairs);
+  getValidPokemon(pairs);
   tpDisplay.innerHTML = pairs;
   let clickedPairs = 0;
 
