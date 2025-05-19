@@ -89,7 +89,7 @@ document.getElementById("hard").addEventListener("click", () => {
 
 document.getElementById("start").addEventListener("click", ()=>{
   canPlay = true;
-  startTimer(60);
+  startTimer(30);
 });
 
 document.getElementById("reset").addEventListener("click", () => {
